@@ -1,59 +1,60 @@
-# BancoDigitalRegistro
+# Banco Digital
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Este proyecto consiste en un formulario de registro robusto y altamente validado desarrollado con Angular. La aplicación utiliza un enfoque de "paso a paso" para mejorar la experiencia del usuario (UX) al segmentar la recolección de datos en 5 etapas lógicas.
 
-## Development server
+La aplicación simula el proceso de alta de un nuevo cliente en un banco digital. Está construida bajo el paradigma de Formularios Reactivos, lo que permite un control total sobre el estado de cada campo, validaciones complejas en tiempo real y flujos asíncronos para la verificación de datos.
 
-To start a local development server, run:
 
-```bash
+## Funcionalidades
+
+- Flujo Guiado
+
+- Validaciones Robustas:
+
+    Nombre: Solo letras y espaciosccon longitud mínima.
+
+    Email: Formato válido y Validación Asíncrona que simula una consulta a base de datos para verificar disponibilidad (delay de 2s).
+
+    Seguridad: Contraseñas con requisitos de complejidad (mayúsculas, minúsculas y números) y Validador Personalizado de coincidencia.
+
+    Restricción de Edad: Validador personalizado para asegurar que el usuario sea mayor de 18 años.
+
+- Interfaz Adaptativa (Responsive)
+
+- Simulación de API: Manejo de estados de carga (enviando) y mensajes de éxito tras la validación final.
+
+
+## Tecnologias utilizadas
+
+- Angular
+- Angular Reactive Forms
+- RxJS
+- CSS3
+
+
+## Preparación del entorno
+
+- Antes de empezar, asegúrate de tener instalado Node.js (versión 18 o superior).
+- Angular CLI instalada de forma global (npm install -g @angular/cli).
+
+1. Clonar e instalar dependencias
+
+git clone https://github.com/tu-usuario/nombre-del-proyecto.git
+cd nombre-del-proyecto
+npm install
+
+2. Ejecutar servidor del desarrollo
 ng serve
-```
+(o ejecutar: npx ng serve)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3. Acceder a la app
+Abre tu navegador en http://localhost:4200/.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Notas
 
-```bash
-ng generate component component-name
-```
+- Persistencia: La aplicación no cuenta con un backend real. La validación de "Email ya registrado" está limitada a los correos test@banco.com y admin@banco.com dentro del código.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- Seguridad: Las contraseñas se gestionan únicamente en el lado del cliente para fines demostrativos.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Multimedia: El logo del banco se carga desde una ruta local (imagenes/ic_bank.png), asegúrate de que el archivo exista en la carpeta assets o actualiza la ruta.
