@@ -1,5 +1,6 @@
 <div class="registro-container">
   <div class="registro-content" [class.form-valid]="registroForm.valid">
+
     <aside class="sidebar-panel">
       <div class="sidebar-brand">
         <div class="brand-mark">
@@ -12,13 +13,12 @@
       </div>
 
       <div class="steps-list">
-        <div class="step-item" 
-            [ngClass]="{ 'done': step < currentStep, 'active': step === currentStep }" 
-            *ngFor="let step of [1, 2, 3, 4, 5]">
+        <div class="step-item"
+             [ngClass]="{ 'done': step < currentStep, 'active': step === currentStep }"
+             *ngFor="let step of [1,2,3,4,5]">
           <div class="step-badge">{{ step }}</div>
           <div class="step-meta">
             <span class="step-title">{{ stepName(step) }}</span>
-            <!-- Esta descripción se ocultará en móviles mediante CSS -->
             <span class="step-desc">{{ stepDescriptionText(step) }}</span>
           </div>
         </div>
@@ -32,70 +32,92 @@
         <p>{{ stepDescription }}</p>
       </div>
 
-      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" (keydown.enter)="onEnter($event)">
+
+        <!-- PASO 1: NOMBRE -->
         <ng-container *ngIf="currentStep === 1">
           <div class="campo-wrapper" [class.input-invalido]="f['nombre'].touched && f['nombre'].invalid">
             <label for="nombre">Full Name</label>
-            <input type="text" id="nombre" formControlName="nombre" placeholder="Ex: John Doe">
+            <input type="text" id="nombre" formControlName="nombre" placeholder="Ex: John Doe" autofocus>
+
             <div *ngIf="f['nombre'].touched && f['nombre'].errors" class="error-mensaje">
               <span *ngIf="f['nombre'].errors['required']">Name is required.</span>
-              <span *ngIf="f['nombre'].errors['pattern']">Name can only contain letters and spaces.</span>
+              <span *ngIf="f['nombre'].errors['pattern']">Only letters and spaces.</span>
               <span *ngIf="f['nombre'].errors['minlength']">Minimum 3 characters.</span>
             </div>
           </div>
         </ng-container>
 
+        <!-- PASO 2: EMAIL (CON VALIDACIÓN ASÍNCRONA) -->
         <ng-container *ngIf="currentStep === 2">
           <div class="campo-wrapper" [class.input-invalido]="(f['email'].touched || f['email'].dirty) && f['email'].invalid">
             <label for="email">Email</label>
-            <input type="email" id="email" formControlName="email" placeholder="email@example.com">
+            <input type="email" id="email" formControlName="email" placeholder="email@example.com" autofocus>
+
+            <!-- Spinner de carga -->
             <div *ngIf="f['email'].pending" class="cargando-email">
-              <span class="spin-icon">?</span> Checking availability...
+              <span class="spin-icon">⟳</span> Checking availability...
             </div>
+
+            <!-- Errores -->
             <div *ngIf="(f['email'].touched || f['email'].dirty) && f['email'].errors" class="error-mensaje">
               <span *ngIf="f['email'].errors['required']">Email is required.</span>
               <span *ngIf="f['email'].errors['email']">Invalid email format.</span>
-              <span *ngIf="f['email'].errors['emailExiste']">This email is already registered. Try another.</span>
+              <span *ngIf="f['email'].errors['emailExiste']">Email already registered (try another).</span>
             </div>
           </div>
         </ng-container>
 
+        <!-- PASO 3: PASSWORD -->
         <ng-container *ngIf="currentStep === 3">
           <div class="campo-wrapper" [class.input-invalido]="f['password'].touched && f['password'].invalid">
             <label for="password">Password</label>
-            <input type="password" id="password" formControlName="password" placeholder="********">
+            <div class="password-input-wrapper">
+              <input [type]="mostrarPassword ? 'text' : 'password'" id="password" formControlName="password" placeholder="********">
+              <button type="button" class="toggle-password-btn" (click)="toggleMostrarPassword()">
+                <span class="material-icons">{{ mostrarPassword ? 'visibility' : 'visibility_off' }}</span>
+              </button>
+            </div>
             <div *ngIf="f['password'].touched && f['password'].errors" class="error-mensaje">
               <span *ngIf="f['password'].errors['required']">Password is required.</span>
-              <span *ngIf="f['password'].errors['pattern']">Password must be at least 8 characters and include uppercase, lowercase, and a number.</span>
+              <span *ngIf="f['password'].errors['pattern']">Include uppercase, lowercase and number.</span>
             </div>
           </div>
+
           <div class="campo-wrapper" [class.input-invalido]="f['confirmar'].touched && (f['confirmar'].invalid || registroForm.errors?.['noCoinciden'])">
             <label for="confirmar">Confirm Password</label>
-            <input type="password" id="confirmar" formControlName="confirmar" placeholder="********">
+            <div class="password-input-wrapper">
+              <input [type]="mostrarConfirmPassword ? 'text' : 'password'" id="confirmar" formControlName="confirmar" placeholder="********">
+              <button type="button" class="toggle-password-btn" (click)="toggleMostrarConfirmPassword()">
+                <span class="material-icons">{{ mostrarConfirmPassword ? 'visibility' : 'visibility_off' }}</span>
+              </button>
+            </div>
             <div *ngIf="f['confirmar'].touched" class="error-mensaje">
-              <span *ngIf="f['confirmar'].errors?.['required']">Please confirm your password.</span>
+              <span *ngIf="f['confirmar'].errors?.['required']">Confirm your password.</span>
               <span *ngIf="registroForm.errors?.['noCoinciden']">Passwords do not match.</span>
             </div>
           </div>
         </ng-container>
 
+        <!-- PASO 4: FECHA -->
         <ng-container *ngIf="currentStep === 4">
-          <div class="campo-wrapper" [class.input-invalido]="f['edad'].touched && f['edad'].invalid">
-            <label for="edad">Age (Minimum 18 years)</label>
-            <input type="number" id="edad" formControlName="edad" placeholder="25">
-            <div *ngIf="f['edad'].touched && f['edad'].errors" class="error-mensaje">
-              <span *ngIf="f['edad'].errors['required']">Age is required.</span>
-              <span *ngIf="f['edad'].errors['edadMinima']">You must be at least 18 years old to register.</span>
+          <div class="campo-wrapper" [class.input-invalido]="f['fechaNacimiento'].touched && f['fechaNacimiento'].invalid">
+            <label for="fechaNacimiento">Date of Birth</label>
+            <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" [max]="maxFecha">
+            <div *ngIf="f['fechaNacimiento'].touched && f['fechaNacimiento'].errors" class="error-mensaje">
+              <span *ngIf="f['fechaNacimiento'].errors['required']">Date is required.</span>
+              <span *ngIf="f['fechaNacimiento'].errors['edadMinima']">You must be 18+.</span>
             </div>
           </div>
         </ng-container>
 
+        <!-- PASO 5: TÉRMINOS -->
         <ng-container *ngIf="currentStep === 5">
           <div class="campo-wrapper checkbox-wrapper" [class.input-invalido]="f['terminos'].touched && f['terminos'].invalid">
             <label class="terminos-wrapper">
               <input type="checkbox" formControlName="terminos">
               <span class="texto-terminos">
-                I accept the <span class="enlace">Terms of Service</span> and the <span class="enlace">Privacy Policy</span>.
+                I accept the <span class="enlace">Terms</span> and <span class="enlace">Privacy Policy</span>
               </span>
             </label>
             <div *ngIf="f['terminos'].touched && f['terminos'].errors" class="error-mensaje">
@@ -104,22 +126,34 @@
           </div>
         </ng-container>
 
+        <!-- BOTONES DE NAVEGACIÓN -->
         <div class="actions-row">
-          <button type="button" class="btn-secondary" (click)="prevStep()" *ngIf="currentStep > 1">Back</button>
-          <button type="button" class="btn-submit" (click)="nextStep()" *ngIf="currentStep < 5" [disabled]="!stepValid(currentStep)">
-            Continue
+          <button type="button" class="btn-secondary" (click)="prevStep()" *ngIf="currentStep > 1">
+            Back
           </button>
-          <button type="submit" class="btn-submit" *ngIf="currentStep === 5" [disabled]="registroForm.invalid || enviando || f['email'].pending">
+
+          <button type="button"
+                  class="btn-submit"
+                  (click)="nextStep()"
+                  *ngIf="currentStep < 5"
+                  [disabled]="f['email'].pending">
+            <span *ngIf="!f['email'].pending">Continue</span>
+            <span *ngIf="f['email'].pending">Validating...</span>
+          </button>
+
+          <button type="submit"
+                  class="btn-submit"
+                  *ngIf="currentStep === 5"
+                  [disabled]="registroForm.invalid || enviando">
             {{ enviando ? 'Processing...' : 'Create Account' }}
           </button>
         </div>
 
-        <div *ngIf="enviando" class="mensaje-api api-cargando">
-          Simulating send to the Digital Bank API... Please wait a moment...
-        </div>
+        <!-- MENSAJES DE ESTADO -->
         <div *ngIf="mensajeExito" class="mensaje-api api-exito">
           {{ mensajeExito }}
         </div>
+
       </form>
     </section>
   </div>

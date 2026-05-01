@@ -552,3 +552,62 @@ input[type="checkbox"]:checked::before {
     font-size: 1.6rem;
   }
 }
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 50px;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-password-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.toggle-password-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(14, 225, 143, 0.3);
+}
+
+.eye-icon {
+  font-size: 1.2rem;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.toggle-password-btn:hover .eye-icon {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .toggle-password-btn {
+    padding: 6px;
+    right: 8px;
+  }
+  
+  .eye-icon {
+    font-size: 1rem;
+  }
+  
+  .password-input-wrapper input {
+    padding-right: 42px;
+  }
+}
