@@ -59,7 +59,6 @@ Abre tu navegador en http://localhost:4200/.
 
 - Multimedia: El logo del banco se carga desde una ruta local (imagenes/ic_bank.png), asegúrate de que el archivo exista en la carpeta assets o actualiza la ruta.
 
-  <img width="1024" height="733" alt="image" src="https://github.com/user-attachments/assets/b8311a59-c08c-4208-8c81-e6627089cf09" />
   <img width="888" height="627" alt="image" src="https://github.com/user-attachments/assets/2bdb942d-190a-4b78-86c1-bd379da3bb17" />
   <img width="963" height="693" alt="image" src="https://github.com/user-attachments/assets/df3c8b55-569b-483d-9251-974c6a3a9eee" />
   <img width="927" height="667" alt="image" src="https://github.com/user-attachments/assets/e62ce95d-218a-4d6d-bc46-8b74e6ce82a0" />
