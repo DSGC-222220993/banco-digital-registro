@@ -59,9 +59,10 @@ Abre tu navegador en http://localhost:4200/.
 
 - Multimedia: El logo del banco se carga desde una ruta local (imagenes/ic_bank.png), asegúrate de que el archivo exista en la carpeta assets o actualiza la ruta.
 
-  <img width="888" height="627" alt="image" src="https://github.com/user-attachments/assets/2bdb942d-190a-4b78-86c1-bd379da3bb17" />
-  <img width="963" height="693" alt="image" src="https://github.com/user-attachments/assets/df3c8b55-569b-483d-9251-974c6a3a9eee" />
-  <img width="927" height="667" alt="image" src="https://github.com/user-attachments/assets/e62ce95d-218a-4d6d-bc46-8b74e6ce82a0" />
+  
+  <img width="931" height="696" alt="image" src="https://github.com/user-attachments/assets/9c6f5d30-9153-41bf-a019-4b2041980ad0" /><br>
+  <img width="888" height="627" alt="image" src="https://github.com/user-attachments/assets/2bdb942d-190a-4b78-86c1-bd379da3bb17" /><br>
+  <img width="963" height="693" alt="image" src="https://github.com/user-attachments/assets/df3c8b55-569b-483d-9251-974c6a3a9eee" /><br>
+  <img width="927" height="667" alt="image" src="https://github.com/user-attachments/assets/e62ce95d-218a-4d6d-bc46-8b74e6ce82a0" /><br>
   <img width="943" height="652" alt="image" src="https://github.com/user-attachments/assets/5ceb15e8-b10b-435c-8323-0bd95ea637bf" />
-  <img width="931" height="696" alt="image" src="https://github.com/user-attachments/assets/9c6f5d30-9153-41bf-a019-4b2041980ad0" />
 
