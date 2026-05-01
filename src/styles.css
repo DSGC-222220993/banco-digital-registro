@@ -1,1 +1,159 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+
+  background: #c7c6d9;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registro-container {
+  width: 100%;
+  max-width: 1100px;
+  border-radius: 32px;
+  background: #0b1b3a;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.registro-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.sidebar-panel {
+  background: linear-gradient(180deg, #0f1b3b 0%, #09112a 100%);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sidebar-panel,
+.sidebar-panel * {
+  color: #ffffff !important;
+}
+
+.sidebar-panel {
+  position: relative;
+}
+
+.sidebar-panel::after {
+  content: "";
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  right: 0;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: #0ee18f;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.steps-list {
+  display: grid;
+  gap: 18px;
+  flex: 1;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+
+  position: relative;
+}
+
+.step-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 60px;
+  bottom: -10px;
+  width: 2px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.step-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(15, 66, 129, 0.9);
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+}
+
+.form-panel {
+  padding: 48px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+}
+
+.form-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: white;
+}
+
+.btn-submit {
+  padding: 14px 30px;
+  border-radius: 999px;
+  border: none;
+  background: #22c55e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .registro-content {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-panel::after {
+    display: none;
+  }
+
+  .step-item:not(:last-child)::after {
+    display: none;
+  }
+}
